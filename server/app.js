@@ -3,9 +3,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var accountRouter = require('./routes/account');
-var transactionRouter = require('./routes/transaction');
-var blockRouter = require('./routes/block');
+var accountRouter = require('./src/routes/account');
+var transactionRouter = require('./src/routes/transaction');
+var blockRouter = require('./src/routes/block');
 
 var app = express();
 
