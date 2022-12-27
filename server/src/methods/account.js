@@ -1,5 +1,31 @@
 const { ethers } = require("ethers");
 
+const transactions = require('../../.data/transactions.json')
+
+async function getHistoryFromLocalStorage(provider, address, start = 0, end = null) {
+    // Return transaction from start and end index
+
+    var hashesArray = []
+    end = end ? end : Math.min(transactions[address]?.length, 25) + start
+    try {
+        hashesArray = transactions[address].slice(start, end)
+    } catch (err) {
+        hashesArray = []
+    }
+
+    var txArray = []
+    for (var i = 0; i < hashesArray.length; i++) {
+        var tx;
+        try {
+            tx = await provider.getTransaction(hashesArray[i])
+        } catch (err) {
+            throw Error(err)
+        }
+        txArray.push(tx)
+    }
+    return txArray
+}
+
 async function getHistory(provider, account) {
     var currentBlock = await provider.getBlockNumber();
     var transactionList = []
@@ -37,5 +63,6 @@ async function getAccount(provider, account) {
 // transformData.js
 module.exports = {
     getAccount,
-    getHistory
+    getHistory,
+    getHistoryFromLocalStorage
 }
