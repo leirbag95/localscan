@@ -3,8 +3,6 @@ const { ethers } = require("ethers");
 const transactions = require('../../.data/transactions.json')
 
 async function getHistoryFromLocalStorage(provider, address, start = 0, end = null) {
-    // Return transaction from start and end index
-
     var hashesArray = []
     end = end ? end : Math.min(transactions[address]?.length, 25) + start
     try {
@@ -31,11 +29,11 @@ async function getHistory(provider, account) {
     var transactionList = []
     var n = await provider.getTransactionCount(account, currentBlock);
     var bal = await provider.getBalance(account, currentBlock);
-    for (var i=currentBlock; i >= 0 && (n > 0); --i) {
+    for (var i = currentBlock; i >= 0 && (n > 0); --i) {
         try {
             var block = await provider.getBlock(i, true);
             if (block && block.transactions) {
-                block.transactions.forEach(async function(e) {
+                block.transactions.forEach(async function (e) {
                     let tx = await provider.getTransaction(e)
                     if (account == tx.from) {
                         transactionList.push(tx)

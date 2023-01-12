@@ -23,6 +23,7 @@ async function initData() {
             var tx;
             try {
                 tx = await provider.getTransaction(hash)
+                console.log(tx)
             } catch (err) {
                throw Error(err)
             }
