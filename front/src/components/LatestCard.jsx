@@ -8,9 +8,19 @@ function LatestCard(props) {
                 Latest {props.name}
             </div>
             <hr />
-            <div class="my-2 grid gap-2">
-            <HorizontalCard icon={props.icon}></HorizontalCard>
-            <HorizontalCard icon={props.icon}></HorizontalCard>
+            <div class="my-2 grid gap-2" style={{width:"100%"}}>
+                 {
+                    (props.type === "bc") ?
+                    (
+                        props.blocks.map( (block) => (
+                            <HorizontalCard icon={props.icon} block={block} type="bc"></HorizontalCard>
+                        ))
+                    ) : (
+                        props.transactions.map( (tx) => (
+                            <HorizontalCard icon={props.icon} tx={tx} type="tx" ></HorizontalCard>
+                        ))
+                    )
+                 }
             </div>
         </div>
     )
