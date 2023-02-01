@@ -4,7 +4,6 @@ import { getBlockNumber, getBlockHistory, getTransactionDetail } from '../utils/
 
 import BKLogo from '../assets/bk_logo.svg'
 import TXLogo from '../assets/tx_logo.svg'
-import banner from '../assets/abstract-shapes-20.svg'
 
 function Home() {
   const [blocks, setBlocks] = useState([]);
